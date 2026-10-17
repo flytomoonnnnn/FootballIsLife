@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: booking-service
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:booking}
+    username: ${DB_USER:booking}
+    password: ${DB_PASSWORD:booking}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate # схемой управляет Flyway, Hibernate только проверяет
+  flyway:
+    locations: classpath:db/migration
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always # учебный проект: видно статус db и diskSpace
